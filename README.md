@@ -3,17 +3,23 @@
 <img src="https://i.imgur.com/bYwl7Vf.png" alt="Learn Regex">
 </p><br/>
 
-## What is Regular Expression?
+## What is Regular Expression? 什么是正则表达式？
 
 > Regular expression is a group of characters or symbols which is used to find a specific pattern from a text. 
+
+> 正则表达式是一组用来从一段文字中匹配一个特定模式的字符或符号。
 
 A regular expression is a pattern that is matched against a subject string from left to right. The word "Regular expression" is a 
 mouthful, you will usually find the term abbreviated as "regex" or "regexp". Regular expression is used for replacing a text within 
 a string, validating form, extract a substring from a string based upon a pattern match, and so much more.
 
+正则表达式是从左至右匹配主体字符串的一种模式。"Regular expression"是正则表达式的全程，很多时候，你会经常看到其缩写 "regex" 或 "regexp"。正则表达式用于从一个字符串中替换一段文字，表单验证，根据指定的匹配模式从字符串中提取出一段子字符串等等。
+
 Imagine you are writing an application and you want to set the rules when user choosing their username. We want the username can 
 contains letter, number, underscore and hyphen. We also want to limit the number of characters in username so it does not look ugly. 
 We use the following regular expression to validate a username:
+
+假设你正在开发一个应用，你想要用户在设置用户名的时候遵循特定的规则。我们希望用户名包含字母，数字，下划线和连接符，同时还希望限制用户名的长度使其看起来更加美观；我们就可以使用以下正则表达式来验证用户名:
 <br/><br/>
 <p align="center">
 <img src="https://i.imgur.com/ekFpQUg.png" alt="Regular expression">
@@ -22,7 +28,9 @@ We use the following regular expression to validate a username:
 Above regular expression can accept the strings `john_doe`, `jo-hn_doe` and `john12_as`. It does not match `Jo` because that string 
 contains uppercase letter and also it is too short.  
 
-## Table of Contents 
+上述正则表达式可以匹配如下字符串：`john_doe`, `jo-hn_doe` 和 `john12_as`，但是它不匹配 `Jo`，因为字符串长度太短，并且含有大写字母。
+
+## Table of Contents 目录
 
 - [Basic Matchers](#1-basic-matchers)
 - [Meta character](#2-meta-characters)
@@ -52,10 +60,12 @@ contains uppercase letter and also it is too short.
   - [Multiline](#53-multiline)
 - [Bonus](#bonus)
 
-## 1. Basic Matchers
+## 1. Basic Matchers 普通匹配
 
 A regular expression is just a pattern of letters and digits that we use to perform search in a text.  For example, the regular expression 
 `cat` means: the letter `c`, followed by the letter `a`, followed by the letter `t`. 
+
+用于在文本中搜寻字母和数字的一种匹配模式。例如，正则表达式 `cat` 表示为：字母 `c` 紧跟着字母 `a` 在紧跟着字母 `t`。
 
 <pre>
 "cat" => The <a href="#learn-regex"><strong>cat</strong></a> sat on the mat
@@ -67,17 +77,21 @@ The regular expression `123` matches the string "123". The regular expression is
 character in the regular expression to each character in the input string, one after another. Regular expressions are normally
 case-sensitive so the regular expression `Cat` would not match the string "cat".
 
+正则表达式 `123` 匹配字符串"123"。正则表达式中的每个字符逐个与输入的字符串中的每个字符进行比较和匹配。正则表达式是区分大小写的，因此正则表达式 `Cat` 不会匹配字符串"cat"。
+
 <pre>
 "Cat" => The cat sat on the <a href="#learn-regex"><strong>Cat</strong></a>
 </pre>
 
 [Test the regular expression](https://regex101.com/r/jw4Vi6/1)
 
-## 2. Meta Characters
+## 2. Meta Characters 元字符
 
 Meta characters are the building blocks of the regular expressions.  Meta characters do not stand for themselves but instead are 
 interpreted in some special way. Some meta characters have a special meaning that are written inside the square brackets. 
 The meta characters are as follows:
+
+元字符是正则表达式组成的一部分，它并不代表着自身，而是以一些特殊的方式来解释。有一些元字符在方括号内有着特殊的意义。元字符如下：
 
 |Meta character|Description|
 |:----:|----|
@@ -94,11 +108,28 @@ The meta characters are as follows:
 |^|Matches the beginning of the input.|
 |$|Matches the end of the input.|
 
-## 2.1 Full stop
+|元字符|具体描述|
+|:----:|----|
+|.|匹配除了换行符以外的所有字符。|
+|[ ]|字符类。匹配任何包含在方括号内的所有字符。|
+|[^ ]|反字符类。匹配任何不包括在方括号内的所有字符。|
+|*|匹配 * 前的字符0次或者多次。|
+|+|匹配 + 前的字符至少1次或者多次。|
+|?|? 前的字符为匹配可选条件。|
+|{n,m}|大括号，匹配 {} 前的字符至少 n 次但不超过 m 次。|
+|(xyz)|字符组，按照括号内的字符顺序来匹配。|
+|&#124;|或，匹配 &#124; 前的字符或其后的字符。|
+|&#92;|转义符，允许你匹配类似一下字符 <code>[ ] ( ) { } . * + ? ^ $ \ &#124;</code>|
+|^|匹配的开头。|
+|$|匹配的结尾。|
+
+## 2.1 Full stop 结尾符
 
 Full stop `.` is the simplest example of meta character. The meta character `.` matches any single character. It will not match return 
 or new line characters. For example, the regular expression `.ar` means: any character, followed by the letter `a`, followed by the 
 letter `r`.
+
+结尾符 `.` 是元字符里最简单的一个。 `.` 匹配任何字符，但不匹配换行符。例如，正则表达式 `.ar` 表示为：匹配任何包含字符 `a` 且紧跟着字符 `r`的字符串。
 
 <pre>
 ".ar" => The <a href="#learn-regex"><strong>car</strong></a> <a href="#learn-regex"><strong>par</strong></a>ked in the <a href="#learn-regex"><strong>gar</strong></a>age.
