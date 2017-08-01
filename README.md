@@ -137,11 +137,13 @@ letter `r`.
 
 [Test the regular expression](https://regex101.com/r/xc9GkU/1)
 
-## 2.2 Character set
+## 2.2 Character set 字符集
 
 Character sets are also called character class. Square brackets are used to specify character sets. Use a hyphen inside a character set to 
 specify the characters' range. The order of the character range inside square brackets doesn't matter. For example, the regular 
 expression `[Tt]he` means: an uppercase `T` or lowercase `t`, followed by the letter `h`, followed by the letter `e`.
+
+字符集也称为字符类，其中方括号经常用于指定字符集。在字符集中使用连接符 `-` 来表示字符的范围，字符集中的字符顺序没有特定的意思，不影响匹配。例如，正则表达式 `[Tt]he` 表示：一个大写的 `T` 或者一个小写的 `t` ，紧跟着字母 `h` 和 `e` 。
 
 <pre>
 "[Tt]he" => <a href="#learn-regex"><strong>The</strong></a> car parked in <a href="#learn-regex"><strong>the</strong></a> garage.
@@ -151,17 +153,21 @@ expression `[Tt]he` means: an uppercase `T` or lowercase `t`, followed by the le
 
 A period inside a character set, however, means a literal period. The regular expression `ar[.]` means: a lowercase character `a`, followed by letter `r`, followed by a period `.` character.
 
+字符集中的句号仅仅表示为句号。正则表达式 `ar[.]` 表示：一个小写的字符 `a`，紧跟着一个字母 `r` 和字符句号 `.`。
+
 <pre>
 "ar[.]" => A garage is a good place to park a c<a href="#learn-regex"><strong>ar.</strong></a>
 </pre>
 
 [Test the regular expression](https://regex101.com/r/wL3xtE/1)
 
-### 2.2.1 Negated character set
+### 2.2.1 Negated character set 反字符集
 
 In general, the caret symbol represents the start of the string, but when it is typed after the opening square bracket it negates the 
 character set. For example, the regular expression `[^c]ar` means: any character except `c`, followed by the character `a`, followed by 
 the letter `r`.
+
+通常来说，插入符号代表字符串的开头，但当它位于方括号里时，它就表示为取反。比如，正则表达式 `[^c]ar` 表示为：匹配任何除了字符 `c` ，紧跟着字符 `a` 和 `r`的所有字符。 
 
 <pre>
 "[^c]ar" => The car <a href="#learn-regex"><strong>par</strong></a>ked in the <a href="#learn-regex"><strong>gar</strong></a>age.
@@ -169,16 +175,20 @@ the letter `r`.
 
 [Test the regular expression](https://regex101.com/r/nNNlq3/1)
 
-## 2.3 Repetitions
+## 2.3 Repetitions 重复
 
 Following meta characters `+`, `*` or `?` are used to specify how many times a subpattern can occur. These meta characters act 
 differently in different situations. 
 
-### 2.3.1 The Star
+`+` ， `*` ， `?` 通常用于指定子匹配模式匹配多少次。这些元字符在不同的场景下表示和不同的意思。
+
+### 2.3.1 The Star 星号
 
 The symbol `*` matches zero or more repetitions of the preceding matcher. The regular expression `a*` means: zero or more repetitions 
 of preceding lowercase character `a`. But if it appears after a character set or class then it finds the repetitions of the whole 
 character set. For example, the regular expression `[a-z]*` means: any number of lowercase letters in a row.
+
+星号 `*` 匹配其前面的字符0次或多次。正则表达式 `a*` 表示为：重复0次或多次小写字母 `a*` ，但如果它出现字符集后，就会匹配字符集的里的所有字符。例如，正则表达式 `[a-z]*` 表示为：匹配任意小写字母。
 
 <pre>
 "[a-z]*" => T<a href="#learn-regex"><strong>he</strong></a> <a href="#learn-regex"><strong>car</strong></a> <a href="#learn-regex"><strong>parked</strong></a> <a href="#learn-regex"><strong>in</strong></a> <a href="#learn-regex"><strong>the</strong></a> <a href="#learn-regex"><strong>garage</strong></a> #21.
@@ -191,16 +201,20 @@ whitespace character `\s` to match a string of whitespace characters. For exampl
 spaces, followed by lowercase character `c`, followed by lowercase character `a`, followed by lowercase character `t`, followed by 
 zero or more spaces.
 
+`*` 可以与 `.` 共用来匹配任意由 `.*` 组成的字符串。 `*` 与 空格符 `\s` 共用可以匹配任意包含空格符的字符串。例如，正则表达式 `\s*cat\s*` 表示为：0个或者多个空格符，紧跟着小写字符 `c` ， `a` ， `t` 和0个或多个空格符。
+
 <pre>
 "\s*cat\s*" => The fat<a href="#learn-regex"><strong> cat </strong></a>sat on the <a href="#learn-regex">con<strong>cat</strong>enation</a>.
 </pre>
 
 [Test the regular expression](https://regex101.com/r/gGrwuz/1)
 
-### 2.3.2 The Plus
+### 2.3.2 The Plus 加号
 
 The symbol `+` matches one or more repetitions of the preceding character. For example, the regular expression `c.+t` means: lowercase 
 letter `c`, followed by any number of character, followed by the lowercase character `t`.
+
+`+` 匹配其前面的字符至少一次或多次。例如，正则表达式 `c.+t` 表示为：小写字母 `c` 紧跟着任意长度的字符和一个字符 `t` 。
 
 <pre>
 "c.+t" => The fat <a href="#learn-regex"><strong>cat sat on the mat</strong></a>.
@@ -208,11 +222,13 @@ letter `c`, followed by any number of character, followed by the lowercase chara
 
 [Test the regular expression](https://regex101.com/r/Dzf9Aa/1)
 
-### 2.3.3 The Question Mark
+### 2.3.3 The Question Mark 问号
 
 In regular expression the meta character `?` makes the preceding character optional. This symbol matches zero or one instance of 
 the preceding character. For example, the regular expression `[T]?he` means: Optional the uppercase letter `T`, followed by the lowercase 
 character `h`, followed by the lowercase character `e`.
+
+在正则表达式中元字符 `?` 的出现将其前面的字符作为匹配可选条件，匹配0次或多次有其前面字符组成的字符。例如，正则表达式 `[T]?he` 表示为：匹配可选条件大写字母 `T` ，紧跟着小写字母 `h` 和 `e` 。
 
 <pre>
 "[T]he" => <a href="#learn-regex"><strong>The</strong></a> car is parked in the garage.
