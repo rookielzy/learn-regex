@@ -242,11 +242,13 @@ character `h`, followed by the lowercase character `e`.
 
 [Test the regular expression](https://regex101.com/r/kPpO2x/1)
 
-## 2.4 Braces
+## 2.4 Braces 大括号（花括号）
 
 In  regular expression braces that are also called quantifiers are used to specify the number of times that a 
 character or a group of characters can be repeated. For example, the regular expression `[0-9]{2,3}` means: Match at least 2 digits but not more than 3 (
 characters in the range of 0 to 9).
+
+在正则表达式中的大括号通常用于指定一个字符或一组字符可以重复多少次。例如，正则表达式 `[0-9]{2,3}` 表示为：在0之9之间至少匹配2个数字但不超过3个数字。
 
 <pre>
 "[0-9]{2,3}" => The number was 9.<a href="#learn-regex"><strong>999</strong></a>7 but we rounded it off to <a href="#learn-regex"><strong>10</strong></a>.0.
@@ -256,6 +258,8 @@ characters in the range of 0 to 9).
 
 We can leave out the second number. For example, the regular expression `[0-9]{2,}` means: Match 2 or more digits. If we also remove 
 the comma the regular expression `[0-9]{2}` means: Match exactly 2 digits.
+
+我们可以去除第二个参数。例如，正则表达式 `[0-9]{2,}` 表示为：至少匹配2个数字或更多。如果我们将逗号 `,` 去除，正则表达式 `[0-9]{2}` 将表示为： 只匹配2个数字。
 
 <pre>
 "[0-9]{2,}" => The number was 9.<a href="#learn-regex"><strong>9997</strong></a> but we rounded it off to <a href="#learn-regex"><strong>10</strong></a>.0.
@@ -269,7 +273,7 @@ the comma the regular expression `[0-9]{2}` means: Match exactly 2 digits.
 
 [Test the regular expression](https://regex101.com/r/gqajq8/1)
 
-## 2.5 Character Group
+## 2.5 Character Group 字符组
 
 Character group is a group of sub-patterns that is written inside Parentheses `(...)`. As we discussed before that in regular expression 
 if we put a quantifier after a character than it will repeat the preceding character. But if we put quantifier after a character group then 
@@ -277,13 +281,15 @@ it repeats the whole character group. For example, the regular expression `(ab)*
 We can also use the alternation `|` meta character inside character group. For example, the regular expression `(c|g|p)ar` means: lowercase character `c`, 
 `g` or `p`, followed by character `a`, followed by character `r`.
 
+字符组是由一组子匹配模式组成的，遵循 `(...)` 的写法。在我们讨论其在正则表达式中的应用前，如果我们将一个量词放在一个字符后面，它将匹配相应次数的字符。但如果我们将量词放在一个字符组后面，它将重复匹配整个字符组。例如，正则表达式 `(ab)*` 匹配"ab"0次或多次。我们也可以在字符组中使用或元字符 `|` 。例如，正则表达式 `(c|g|p)ar` 表示为： 匹配小写字符 `c` 或 `g` 或 `p` ，并紧跟着字符 `a` 和 `r` 。 
+
 <pre>
 "(c|g|p)ar" => The <a href="#learn-regex"><strong>car</strong></a> is <a href="#learn-regex"><strong>par</strong></a>ked in the <a href="#learn-regex"><strong>gar</strong></a>age.
 </pre>
 
 [Test the regular expression](https://regex101.com/r/tUxrBG/1)
 
-## 2.6 Alternation
+## 2.6 Alternation 或
 
 In regular expression Vertical bar `|` is used to define alternation. Alternation is like a condition between multiple expressions. Now, 
 you may be thinking that character set and alternation works the same way. But the big difference between character set and alternation 
@@ -291,13 +297,15 @@ is that character set works on character level but alternation works on expressi
 `(T|t)he|car` means: uppercase character `T` or lowercase `t`, followed by lowercase character `h`, followed by lowercase character `e` 
 or lowercase character `c`, followed by lowercase character `a`, followed by lowercase character `r`.
 
+在正则表达式中，垂直符号 `|` 被用作定义或语法。或就像在不同的表达式中充当一个条件。现在你可能在想字符集和或语法不是做了相同的工作吗，其实或语法与字符集最大的不同就是字符集在字符层面发挥作用，而或语法在表达式的层面上工作。例如，正则表达式 `(T|t)he|car` 表示为：大写字符 `T` 或小写字符 `t` ，紧跟着小写字符 `h` 和 `e` 或 紧跟着小写字符 `c` ， `a` 和 `r` 。
+
 <pre>
 "(T|t)he|car" => <a href="#learn-regex"><strong>The</strong></a> <a href="#learn-regex"><strong>car</strong></a> is parked in <a href="#learn-regex"><strong>the</strong></a> garage.
 </pre>
 
 [Test the regular expression](https://regex101.com/r/fBXyX0/1)
 
-## 2.7 Escaping special character
+## 2.7 Escaping special character 转义特殊字符
 
 Backslash `\` is used in regular expression to escape the next character. This allows to to specify a symbol as a matching character 
 including reserved characters `{ } [ ] / \ + * . $ ^ | ?`. To use a special character as a matching character prepend `\` before it. 
@@ -305,25 +313,31 @@ For example, the regular expression `.` is used to match any character except ne
 expression `(f|c|m)at\.?` means: lowercase letter `f`, `c` or `m`, followed by lowercase character `a`, followed by lowercase letter 
 `t`, followed by optional `.` character.
 
+正则表达式中的反斜杠 `\` 用于转移其下一个字符，它允许指定元字符作为匹配字符，包括如下保留字符 `{ } [ ] / \ + * $ ^ | ?` 。使用方法：只需要在需要指定匹配的字符前加上 `\` 即可。例如，正则表达式 `.` 用于匹配除了换行符以外的所有字符。假设现在需要在一个输入里进行正则表达式 `(f|c|m)at\.?` 匹配，此正则表达式表示为：小写字母 `f` 或 `c` 或 `m`，紧跟着小写字符 `a` 和 `t` ，最后 `.`  作为可选条件进行匹配。
+
 <pre>
 "(f|c|m)at\.?" => The <a href="#learn-regex"><strong>fat</strong></a> <a href="#learn-regex"><strong>cat</strong></a> sat on the <a href="#learn-regex"><strong>mat.</strong></a>
 </pre>
 
 [Test the regular expression](https://regex101.com/r/DOc5Nu/1)
 
-## 2.8 Anchors
+## 2.8 Anchors 锚
 
 In regular expressions, to check if the matching symbol is the starting symbol or ending symbol of the input string for this purpose
 we use anchors. Anchors are of two types: First type is Caret `^` that check if the matching character is the start character of the 
 input and the second type is Dollar `$` that checks if matching character is the last character of the input string.
 
-### 2.8.1 Caret
+在正则表达式中，为了知道相应的匹配模式是开头匹配还是末尾匹配，我们可以使用锚。锚有两种类型：第一种类型就是插入符号 `^` 用于检查待匹配的字符串是否符合其开头的匹配模式；第二种就是美元符号 `$` 用于检查待匹配的字符串是否符合其结尾的匹配模式。
+
+### 2.8.1 Caret 插入符
 
 Caret `^` symbol is used to check if matching character is the first character of the input string. If we apply the following regular 
 expression `^a` (if a is the starting symbol) to input string `abc` it matches `a`. But if we apply regular expression `^b` on above 
 input string it does not match anything. Because in input string `abc` "b" is not the starting symbol. Let's take a look at another 
 regular expression `^(T|t)he` which means: uppercase character `T` or lowercase character `t` is the start symbol of the input string, 
 followed by lowercase character `h`, followed by lowercase character `e`.
+
+插入符号 `^` 用于检查待匹配的字符串是否符合其开头的匹配模式。如果我们采用如下正则表达式 `^a` （如果 a 是字符串的开头），输入的字符串 `abc` 将匹配 `a` 。但如果我们采用如下正则表达式 `^b` ，上述的字符串将不会匹配任何字符，因为 `abc` 的开头并不是"b"。让我们继续看下一个正则表达式 `^(T|t)he` ，其表示为：大写字母 `T` 或小写字母 `t` 作为匹配的开头，并紧跟着小写字母 `h` 和 `e` 。
 
 <pre>
 "(T|t)he" => <a href="#learn-regex"><strong>The</strong></a> car is parked in <a href="#learn-regex"><strong>the</strong></a> garage.
@@ -337,11 +351,13 @@ followed by lowercase character `h`, followed by lowercase character `e`.
 
 [Test the regular expression](https://regex101.com/r/jXrKne/1)
 
-### 2.8.2 Dollar
+### 2.8.2 Dollar 美元符号
 
 Dollar `$` symbol is used to check if matching character is the last character of the input string. For example, regular expression 
 `(at\.)$` means: a lowercase character `a`, followed by lowercase character `t`, followed by a `.` character and the matcher 
 must be end of the string.
+
+美元符号 `$` 用于检查匹配的字符串的结尾是否匹配匹配模式。例如，正则表达式 `(at\.)$` 表示为：小写字母 `a` ，紧跟着小写字母 `t` 和 `.` ，且匹配的字符串必要要以次为结尾。
 
 <pre>
 "(at\.)" => The fat c<a href="#learn-regex"><strong>at.</strong></a> s<a href="#learn-regex"><strong>at.</strong></a> on the m<a href="#learn-regex"><strong>at.</strong></a>
